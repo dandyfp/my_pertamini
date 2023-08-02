@@ -9,4 +9,5 @@ class BaseColors {
   static const Color disable = Color(0xFFC2C2C2);
   static const Color red = Color(0xffCC5E5E);
   static const Color white = Color(0xffffffff);
+  static const Color purpleSoft = Color(0xffB694EC);
 }
