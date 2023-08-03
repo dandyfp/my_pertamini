@@ -4,7 +4,7 @@ import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/shared/dimens.dart';
 import 'package:my_pertamini/src/iu/shared/strings.dart';
 import 'package:my_pertamini/src/iu/shared/ui_helpers.dart';
-import 'package:my_pertamini/src/iu/views/register/regis_viemodel.dart';
+import 'package:my_pertamini/src/iu/views/register/regis_viewmodel.dart';
 import 'package:my_pertamini/src/iu/views/widgets/button.dart';
 import 'package:stacked/stacked.dart';
 
@@ -24,7 +24,7 @@ class RegisView extends StatelessWidget {
     SDP.init(context);
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => RegisViewModel(),
-      builder: (context, viewModel, child) => Scaffold(
+      builder: (context, vm, child) => Scaffold(
         appBar: AppBar(
           centerTitle: false,
           automaticallyImplyLeading: false,
@@ -92,7 +92,13 @@ class RegisView extends StatelessWidget {
               ),
               verticalSpace(SDP.sdp(30.0)),
               Button(
-                onPressed: () {},
+                isLoading: vm.isBusy,
+                onPressed: () => vm.register(
+                  name: nameController.text,
+                  email: emailController.text,
+                  password: passwordController.text,
+                  context: context,
+                ),
                 color: BaseColors.primary,
                 child: Center(
                   child: Text(

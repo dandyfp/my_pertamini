@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:my_pertamini/src/core/core_res.dart';
+import 'package:my_pertamini/src/core/core_service.dart';
 import 'package:my_pertamini/src/helpers/http_helper.dart';
 import 'package:my_pertamini/src/network/api_result.dart';
 import 'package:my_pertamini/src/network/network_exceptions.dart';
+import 'package:my_pertamini/src/services/request/register_req.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import '../constans/config.dart';
 
-class AuthService {
+@LazySingleton()
+class AuthService extends CoreService {
   Future<ApiResult<CoreRes>> login({
     required String email,
     required String password,
@@ -38,12 +42,11 @@ class AuthService {
     try {
       var dio = Dio();
       dio.interceptors.add(HttpHelper().getDioInterceptorDio());
-      var formData = FormData.fromMap({
-        'email': email,
-        'password': password,
-        'name': name,
-      });
-
+      var formData = RegisterRed(
+        email: email,
+        password: password,
+        name: name,
+      ).toJson();
       final response = await dio.post(
         "${Config.baseUrl}register",
         data: formData,

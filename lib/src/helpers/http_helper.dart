@@ -42,7 +42,7 @@ class HttpHelper {
             return handler.next(response);
           }
         },
-        onError: (DioError e, handler) {
+        onError: (DioException e, handler) {
           logger.e('<-- ${e.response?.statusCode} ${e.response?.statusMessage} ${e.response?.requestOptions.uri}');
           logger.e('Headers: ${e.response?.headers}');
           logger.e('Error: ${e.response?.data}');
