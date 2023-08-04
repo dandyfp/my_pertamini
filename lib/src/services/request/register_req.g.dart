@@ -9,6 +9,7 @@ part of 'register_req.dart';
 RegisterRed _$RegisterRedFromJson(Map<String, dynamic> json) => RegisterRed(
       email: json['email'] as String?,
       password: json['password'] as String?,
+      confirmPassword: json['confirm_password'] as String?,
       name: json['name'] as String?,
     );
 
@@ -17,4 +18,5 @@ Map<String, dynamic> _$RegisterRedToJson(RegisterRed instance) =>
       'email': instance.email,
       'password': instance.password,
       'name': instance.name,
+      'confirm_password': instance.confirmPassword,
     };

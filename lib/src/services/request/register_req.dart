@@ -7,9 +7,12 @@ class RegisterRed {
   String? email;
   String? password;
   String? name;
+  @JsonKey(name: "confirm_password")
+  String? confirmPassword;
   RegisterRed({
     this.email,
     this.password,
+    this.confirmPassword,
     this.name,
   });
 

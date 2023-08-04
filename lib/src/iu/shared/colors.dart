@@ -10,4 +10,7 @@ class BaseColors {
   static const Color red = Color(0xffCC5E5E);
   static const Color white = Color(0xffffffff);
   static const Color purpleSoft = Color(0xffB694EC);
+  static const Color green = Color.fromARGB(255, 83, 188, 62);
+  static const Color primaryBlue = Color(0xff1872B3);
+  static const Color grey = Color(0xff969696);
 }

@@ -20,9 +20,10 @@ class RegisView extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     final TextEditingController phoneController = TextEditingController();
+    final TextEditingController confirmPasswordController = TextEditingController();
 
     SDP.init(context);
-    return ViewModelBuilder.reactive(
+    return ViewModelBuilder<RegisViewModel>.reactive(
       viewModelBuilder: () => RegisViewModel(),
       builder: (context, vm, child) => Scaffold(
         appBar: AppBar(
@@ -91,9 +92,17 @@ class RegisView extends StatelessWidget {
                 placeholder: 'Masukkan Kata Sandi',
               ),
               verticalSpace(SDP.sdp(30.0)),
+              KTextField(
+                controller: confirmPasswordController,
+                label: Strings.labelPassword,
+                borderColor: BaseColors.hint,
+                placeholder: 'Masukkan Ulang Kata Sandi',
+              ),
+              verticalSpace(SDP.sdp(30.0)),
               Button(
                 isLoading: vm.isBusy,
                 onPressed: () => vm.register(
+                  confirmPassword: confirmPasswordController.text,
                   name: nameController.text,
                   email: emailController.text,
                   password: passwordController.text,

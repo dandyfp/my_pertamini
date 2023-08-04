@@ -15,6 +15,7 @@ class RegisViewModel extends BaseViewModel {
     required String name,
     required String email,
     required String password,
+    required String confirmPassword,
     required BuildContext context,
   }) async {
     setBusy(true);
@@ -22,6 +23,7 @@ class RegisViewModel extends BaseViewModel {
       email: email,
       password: password,
       name: name,
+      confirmPassword: confirmPassword,
     );
     setBusy(false);
     return result.when(success: (CoreRes data) {

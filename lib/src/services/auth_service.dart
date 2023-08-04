@@ -30,7 +30,9 @@ class AuthService extends CoreService {
       CoreRes data = CoreRes.fromJson(response.data, (json) => null);
       return ApiResult.success(data: data);
     } catch (e) {
-      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
+      );
     }
   }
 
@@ -38,6 +40,7 @@ class AuthService extends CoreService {
     required String email,
     required String password,
     required String name,
+    required String confirmPassword,
   }) async {
     try {
       var dio = Dio();
@@ -46,6 +49,7 @@ class AuthService extends CoreService {
         email: email,
         password: password,
         name: name,
+        confirmPassword: confirmPassword,
       ).toJson();
       final response = await dio.post(
         "${Config.baseUrl}register",
@@ -54,7 +58,9 @@ class AuthService extends CoreService {
       CoreRes data = CoreRes.fromJson(response.data, (json) => null);
       return ApiResult.success(data: data);
     } catch (e) {
-      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
+      );
     }
   }
 }
