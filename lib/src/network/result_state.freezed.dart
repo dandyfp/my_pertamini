@@ -19,19 +19,23 @@ mixin _$ResultState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(
+            NetworkExceptions error, CoreRes<dynamic>? errorRes)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? data,
-    TResult? Function(NetworkExceptions error)? error,
+    TResult? Function(NetworkExceptions error, CoreRes<dynamic>? errorRes)?
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(NetworkExceptions error, CoreRes<dynamic>? errorRes)?
+        error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,7 +142,9 @@ class _$Data<T> implements Data<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(
+            NetworkExceptions error, CoreRes<dynamic>? errorRes)
+        error,
   }) {
     return data(this.data);
   }
@@ -147,7 +153,8 @@ class _$Data<T> implements Data<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? data,
-    TResult? Function(NetworkExceptions error)? error,
+    TResult? Function(NetworkExceptions error, CoreRes<dynamic>? errorRes)?
+        error,
   }) {
     return data?.call(this.data);
   }
@@ -156,7 +163,8 @@ class _$Data<T> implements Data<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(NetworkExceptions error, CoreRes<dynamic>? errorRes)?
+        error,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -211,7 +219,7 @@ abstract class _$$ErrorCopyWith<T, $Res> {
   factory _$$ErrorCopyWith(_$Error<T> value, $Res Function(_$Error<T>) then) =
       __$$ErrorCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({NetworkExceptions error});
+  $Res call({NetworkExceptions error, CoreRes<dynamic>? errorRes});
 
   $NetworkExceptionsCopyWith<$Res> get error;
 }
@@ -227,12 +235,17 @@ class __$$ErrorCopyWithImpl<T, $Res>
   @override
   $Res call({
     Object? error = null,
+    Object? errorRes = freezed,
   }) {
     return _then(_$Error<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as NetworkExceptions,
+      errorRes: freezed == errorRes
+          ? _value.errorRes
+          : errorRes // ignore: cast_nullable_to_non_nullable
+              as CoreRes<dynamic>?,
     ));
   }
 
@@ -248,14 +261,16 @@ class __$$ErrorCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$Error<T> implements Error<T> {
-  const _$Error({required this.error});
+  const _$Error({required this.error, this.errorRes});
 
   @override
   final NetworkExceptions error;
+  @override
+  final CoreRes<dynamic>? errorRes;
 
   @override
   String toString() {
-    return 'ResultState<$T>.error(error: $error)';
+    return 'ResultState<$T>.error(error: $error, errorRes: $errorRes)';
   }
 
   @override
@@ -263,11 +278,13 @@ class _$Error<T> implements Error<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Error<T> &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.errorRes, errorRes) ||
+                other.errorRes == errorRes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, error, errorRes);
 
   @JsonKey(ignore: true)
   @override
@@ -279,29 +296,33 @@ class _$Error<T> implements Error<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) data,
-    required TResult Function(NetworkExceptions error) error,
+    required TResult Function(
+            NetworkExceptions error, CoreRes<dynamic>? errorRes)
+        error,
   }) {
-    return error(this.error);
+    return error(this.error, errorRes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? data,
-    TResult? Function(NetworkExceptions error)? error,
+    TResult? Function(NetworkExceptions error, CoreRes<dynamic>? errorRes)?
+        error,
   }) {
-    return error?.call(this.error);
+    return error?.call(this.error, errorRes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? data,
-    TResult Function(NetworkExceptions error)? error,
+    TResult Function(NetworkExceptions error, CoreRes<dynamic>? errorRes)?
+        error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(this.error, errorRes);
     }
     return orElse();
   }
@@ -339,9 +360,12 @@ class _$Error<T> implements Error<T> {
 }
 
 abstract class Error<T> implements ResultState<T> {
-  const factory Error({required final NetworkExceptions error}) = _$Error<T>;
+  const factory Error(
+      {required final NetworkExceptions error,
+      final CoreRes<dynamic>? errorRes}) = _$Error<T>;
 
   NetworkExceptions get error;
+  CoreRes<dynamic>? get errorRes;
   @JsonKey(ignore: true)
   _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
       throw _privateConstructorUsedError;

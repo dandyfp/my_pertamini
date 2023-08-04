@@ -1,10 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:my_pertamini/src/iu/shared/style.dart';
 import 'package:my_pertamini/src/iu/views/widgets/button.dart';
 
 import '../../../helpers/scalable_dp_helper.dart';
 import '../../shared/colors.dart';
 import '../../shared/dimens.dart';
+import '../../shared/images.dart';
 import '../../shared/ui_helpers.dart';
 
 class ItemFuel extends StatelessWidget {
@@ -18,92 +19,85 @@ class ItemFuel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: BaseColors.purpleSoft,
-        ),
-        borderRadius: BorderRadius.circular(
-          SDP.sdp(radius),
-        ),
+        border: Border.all(color: BaseColors.white),
+        borderRadius: BorderRadius.circular(SDP.sdp(textXS)),
+        boxShadow: [
+          BoxShadow(
+            color: BaseColors.primaryBlue.withOpacity(0.3),
+            blurRadius: 5,
+            offset: const Offset(0.0, 8.0),
+            blurStyle: BlurStyle.outer,
+          )
+        ],
       ),
-      child: Column(
-        children: [
-          Container(
-            height: SDP.sdp(36.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  SDP.sdp(radius),
-                ),
-                topRight: Radius.circular(
-                  SDP.sdp(radius),
-                ),
-                bottomRight: Radius.circular(
-                  SDP.sdp(radius),
-                ),
-              ),
-              color: BaseColors.purpleSoft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            verticalSpace(SDP.sdp(12.0)),
+            Text(
+              'Bahan Bakar Pertamax',
+              style: boldBlackStyle.copyWith(fontSize: SDP.sdp(17.0)),
             ),
-            child: Center(
-                child: Text(
-              'Pertamax',
-              style: TextStyle(
-                fontSize: SDP.sdp(textL),
-                color: BaseColors.black,
-                fontWeight: FontWeight.w600,
-              ),
-            )),
-          ),
-          verticalSpace(SDP.sdp(11.0)),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: SDP.sdp(20.0)),
-            child: Text(
-              'Pertamax sangat direkomendasikan untuk digunakan pada kendaraan yang memiliki kompresi rasio 10:1 hingga 11:1 atau kendaraan berbahan bakar bensin yang menggunakan teknologi setara dengan Electronic Fuel Injection (EFI)',
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: SDP.sdp(textS),
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          verticalSpace(SDP.sdp(6.0)),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: SDP.sdp(20.0)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            verticalSpace(SDP.sdp(11.0)),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Rp. 12.000',
-                  style: TextStyle(fontSize: SDP.sdp(text), fontWeight: FontWeight.w500),
+                Container(
+                  height: SDP.sdp(71.0),
+                  width: SDP.sdp(71.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(SDP.sdp(5)),
+                    color: BaseColors.primaryBlue.withOpacity(0.2),
+                  ),
+                  child: Center(
+                      child: Image.asset(
+                    icFuel,
+                    height: SDP.sdp(34.0),
+                  )),
                 ),
-                Text(
-                  'Oktan 92',
-                  style: TextStyle(fontSize: SDP.sdp(text), fontWeight: FontWeight.w500),
+                horizontalSpace(SDP.sdp(8.0)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: SDP.sdp(190.0),
+                      child: Text(
+                        'Pertamax sangat direkomendasikan untuk digunakan pada kendaraan yang memiliki kompresi rasio 10:1 hingga 11:1 atau kendaraan berbahan bakar bensin yang menggunakan teknologi setara dengan Electronic Fuel Injection (EFI)',
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: regulerGreyStyle.copyWith(
+                          fontSize: SDP.sdp(textXS),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'Oktan Number 92',
+                      style: boldBluePrimaryStyle.copyWith(
+                        fontSize: SDP.sdp(text),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ),
-          verticalSpace(SDP.sdp(7.0)),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Button(
+            verticalSpace(SDP.sdp(14.0)),
+            Button(
               onPressed: onTap,
-              border: Border.all(color: BaseColors.black),
-              color: BaseColors.purpleSoft,
+              color: BaseColors.primaryBlue,
               borderRadius: BorderRadius.circular(SDP.sdp(4)),
               child: Center(
                 child: Text(
                   'Pilih',
-                  style: TextStyle(
+                  style: mediumWhiteStyle.copyWith(
                     fontSize: SDP.sdp(textS),
-                    color: BaseColors.white,
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

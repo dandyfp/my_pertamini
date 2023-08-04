@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_pertamini/src/app/app.locator.dart';
 import 'package:my_pertamini/src/app/app.router.dart';
+import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/views/cart/cart_view.dart';
 import 'package:my_pertamini/src/iu/views/landing/landing_view.dart';
 import 'package:my_pertamini/src/iu/views/login/login_view.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My Pertamini',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: BaseColors.primaryBlue),
         useMaterial3: true,
       ),
       home: const LandingView(),

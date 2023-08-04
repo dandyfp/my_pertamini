@@ -32,6 +32,7 @@ class AuthService extends CoreService {
     } catch (e) {
       return ApiResult.failure(
         error: NetworkExceptions.getDioException(e),
+        coreRes: NetworkExceptions.getErrorRes(e),
       );
     }
   }

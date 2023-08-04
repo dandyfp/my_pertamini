@@ -49,6 +49,10 @@ dependencies:
 
   #font
   google_fonts: ^5.1.0
+  flutter_svg: ^2.0.6
+
+  #dropdown
+  dropdown_search: ^5.0.6
 
 dev_dependencies:
   build_runner: ^2.4.4

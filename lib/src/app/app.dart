@@ -1,11 +1,16 @@
+import 'package:my_pertamini/src/iu/views/detail_order/detail_order_view.dart';
 import 'package:my_pertamini/src/iu/views/home/home_view.dart';
 import 'package:my_pertamini/src/services/auth_service.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../iu/views/status_order/status_order_view.dart';
+
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView),
+    MaterialRoute(page: DetailOrderView),
+    MaterialRoute(page: StatusOrderView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

@@ -28,7 +28,7 @@ class LoginViewModel extends BaseViewModel with CoreViewModel {
       return ResultState.data(data: data);
     }, failure: (CoreRes? erroRes, NetworkExceptions error) {
       _authService.snackBarService.showCustomSnackBar(
-        message: error.toString(),
+        message: erroRes?.message ?? '',
         variant: SnackbarType.warning,
       );
       return ResultState.error(error: error);
