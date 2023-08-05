@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_pertamini/src/iu/shared/style.dart';
 
 import '../../../helpers/scalable_dp_helper.dart';
 import '../../shared/colors.dart';
@@ -78,7 +79,7 @@ class KTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        label != null ? Text(label ?? '', style: TextStyle(fontSize: SDP.sdp(textS))) : Container(),
+        label != null ? Text(label ?? '', style: boldGreyStyle.copyWith(fontSize: SDP.sdp(textS))) : Container(),
         label != null ? verticalSpace(SDP.sdp(4.0)) : Container(),
         Material(
           elevation: elevation,

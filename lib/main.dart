@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_pertamini/src/app/app.locator.dart';
 import 'package:my_pertamini/src/app/app.router.dart';
+import 'package:my_pertamini/src/helpers/injector/injector.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/views/cart/cart_view.dart';
-import 'package:my_pertamini/src/iu/views/landing/landing_view.dart';
 import 'package:my_pertamini/src/iu/views/login/login_view.dart';
 import 'package:my_pertamini/src/iu/views/main/main_view.dart';
 import 'package:my_pertamini/src/iu/views/profile/profile_view.dart';
@@ -11,7 +11,9 @@ import 'package:my_pertamini/src/iu/views/register/regis_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'src/helpers/setup_snackbar_ui.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupInjector();
   setupLocator();
   setupSnackbarUi();
   runApp(const MyApp());
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: BaseColors.primaryBlue),
         useMaterial3: true,
       ),
-      home: const LandingView(),
+      // home: const LandingView(),
       routes: {
         LoginView.routeName: (context) => const LoginView(),
         MainView.routeName: (context) => const MainView(),

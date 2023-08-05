@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'profile.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
-      name: json['name'] as String?,
+Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       token: json['token'] as String?,
+      name: json['name'] as String?,
       email: json['email'] as String?,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'token': instance.token,
       'name': instance.name,
       'email': instance.email,

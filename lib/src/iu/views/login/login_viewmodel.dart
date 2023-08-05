@@ -13,11 +13,26 @@ import '../../../app/app.locator.dart';
 class LoginViewModel extends BaseViewModel with CoreViewModel {
   final AuthService _authService = locator<AuthService>();
 
+  bool isObsecure = true;
+
+  final GlobalKey<FormState> keyForm = GlobalKey<FormState>();
+
+  void validate({
+    required String email,
+    required String password,
+  }) {
+    if (keyForm.currentState?.validate() ?? false) {
+      login(
+        email: email,
+        password: password,
+      );
+      notifyListeners();
+    }
+  }
+
   Future<ResultState<CoreRes>> login({
     required String email,
     required String password,
-    required BuildContext context,
-    required String route,
   }) async {
     setBusy(true);
     var result = await _authService.login(email: email, password: password);
@@ -36,4 +51,6 @@ class LoginViewModel extends BaseViewModel with CoreViewModel {
   }
 
   void showHomeView() => navigationService.navigateToHomeView();
+
+  void showRegisView() => navigationService.navigateToRegisView();
 }

@@ -11,6 +11,10 @@ import '../../../services/auth_service.dart';
 class RegisViewModel extends BaseViewModel {
   final AuthService _authService = locator<AuthService>();
 
+  bool isObsecure = true;
+  bool isObsecureConfimPass = true;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   Future<ResultState<CoreRes>> register({
     required String name,
     required String email,

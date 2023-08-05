@@ -4,6 +4,9 @@
 // SemiBold - 600
 // Bold - 700
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
@@ -79,3 +82,5 @@ TextStyle boldGreyStyle = GoogleFonts.nunito(
   color: BaseColors.grey,
   fontWeight: FontWeight.w700,
 );
+
+Widget showLoading = Platform.isIOS ? const CupertinoActivityIndicator() : const CircularProgressIndicator();

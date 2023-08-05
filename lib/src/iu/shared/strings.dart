@@ -6,7 +6,7 @@ class Strings {
   static const String labelWelcome = "Selamat datang di Mypertamini";
   static const String labelChooseLogin = "klik  masuk jika sudah memiliki akun.";
   static const String labelChooseRegis = "klik  daftar jika sudah memiliki akun";
-  static const String labelInputRegis = "Silahkan isi data diri anda";
+  static const String labelInputRegis = "Registrasi Akun";
   static const String labelInputLogin = "Silahkan Masuk";
   static const String labelEmail = "Email";
   static const String labelName = "Nama";

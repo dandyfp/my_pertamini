@@ -4,10 +4,12 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User {
+  String? token;
   String? name;
   String? email;
   User({
     this.name,
+    this.token,
     this.email,
   });
 

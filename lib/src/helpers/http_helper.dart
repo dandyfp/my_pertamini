@@ -4,8 +4,14 @@ import 'package:logger/logger.dart';
 import 'package:my_pertamini/src/constans/config.dart';
 import 'package:my_pertamini/src/helpers/shared_preferences_helper.dart';
 
+import 'injector/injector.dart';
+
 class HttpHelper {
-  getToken() => SharedPreferencesHelper().getString(Config.session);
+  final SharedPreferencesHelper _sharedPreferencesManager = locatorLocal<SharedPreferencesHelper>();
+
+  getToken() => _sharedPreferencesManager.getString(Config.session);
+
+  saveToken(String token) => _sharedPreferencesManager.putString(Config.session, token);
 
   BuildContext? currentContext;
   var logger = Logger(
