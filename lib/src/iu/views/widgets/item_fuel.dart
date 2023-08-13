@@ -10,9 +10,17 @@ import '../../shared/ui_helpers.dart';
 
 class ItemFuel extends StatelessWidget {
   final VoidCallback onTap;
+  final String name;
+  final String description;
+  final String oktanNumber;
+  final int? price;
   const ItemFuel({
     Key? key,
     required this.onTap,
+    required this.name,
+    required this.description,
+    required this.oktanNumber,
+    this.price,
   }) : super(key: key);
 
   @override
@@ -37,7 +45,7 @@ class ItemFuel extends StatelessWidget {
           children: [
             verticalSpace(SDP.sdp(12.0)),
             Text(
-              'Bahan Bakar Pertamax',
+              name,
               style: boldBlackStyle.copyWith(fontSize: SDP.sdp(17.0)),
             ),
             verticalSpace(SDP.sdp(11.0)),
@@ -64,8 +72,8 @@ class ItemFuel extends StatelessWidget {
                     SizedBox(
                       width: SDP.sdp(190.0),
                       child: Text(
-                        'Pertamax sangat direkomendasikan untuk digunakan pada kendaraan yang memiliki kompresi rasio 10:1 hingga 11:1 atau kendaraan berbahan bakar bensin yang menggunakan teknologi setara dengan Electronic Fuel Injection (EFI)',
-                        maxLines: 3,
+                        description,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: regulerGreyStyle.copyWith(
                           fontSize: SDP.sdp(textXS),
@@ -73,7 +81,7 @@ class ItemFuel extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Oktan Number 92',
+                      'Oktan Number $oktanNumber',
                       style: boldBluePrimaryStyle.copyWith(
                         fontSize: SDP.sdp(text),
                       ),

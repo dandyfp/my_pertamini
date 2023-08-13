@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_pertamini/src/app/app.locator.dart';
 import 'package:my_pertamini/src/app/app.router.dart';
 import 'package:my_pertamini/src/helpers/injector/injector.dart';
+import 'package:my_pertamini/src/helpers/setup_dialog.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/views/cart/cart_view.dart';
 import 'package:my_pertamini/src/iu/views/login/login_view.dart';
@@ -16,6 +17,7 @@ Future main() async {
   await setupInjector();
   setupLocator();
   setupSnackbarUi();
+  setupDialog();
   runApp(const MyApp());
 }
 

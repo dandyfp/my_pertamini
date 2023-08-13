@@ -42,7 +42,7 @@ class _MainViewState extends State<MainView> {
           BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.home,
-              color: BaseColors.primary,
+              color: BaseColors.primaryBlue,
             ),
             label: 'Home',
             icon: Icon(
@@ -52,7 +52,7 @@ class _MainViewState extends State<MainView> {
           BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.shopping_cart_outlined,
-              color: BaseColors.primary,
+              color: BaseColors.primaryBlue,
             ),
             label: 'Keranjang',
             icon: Icon(
@@ -62,7 +62,7 @@ class _MainViewState extends State<MainView> {
           BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.emoji_people_sharp,
-              color: BaseColors.primary,
+              color: BaseColors.primaryBlue,
             ),
             label: 'Profile',
             icon: Icon(

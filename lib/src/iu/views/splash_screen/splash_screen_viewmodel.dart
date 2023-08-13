@@ -23,5 +23,5 @@ class SplashSreenViewModel extends FutureViewModel with CoreViewModel {
   }
 
   void showLogin() => navigationService.clearStackAndShow(Routes.loginView);
-  void showHome() => navigationService.clearStackAndShow(Routes.homeView);
+  void showHome() => navigationService.clearStackAndShow(Routes.mainView);
 }

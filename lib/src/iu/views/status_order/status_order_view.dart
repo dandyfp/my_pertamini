@@ -2,18 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/shared/ui_helpers.dart';
 import 'package:my_pertamini/src/iu/views/status_order/status_order_viewmodel.dart';
+import 'package:my_pertamini/src/iu/views/widgets/button.dart';
 import 'package:my_pertamini/src/iu/views/widgets/item_my_fuel.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../helpers/scalable_dp_helper.dart';
+import '../../../models/order.dart';
 import '../../shared/dimens.dart';
 import '../../shared/style.dart';
 
 class StatusOrderView extends StatelessWidget {
-  const StatusOrderView({super.key});
+  final String nameFuel;
+  final String numberOktan;
+  final Order? dataOrder;
+  const StatusOrderView({
+    super.key,
+    required this.nameFuel,
+    required this.numberOktan,
+    required this.dataOrder,
+  });
 
   @override
   Widget build(BuildContext context) {
+    int grandTotal = (dataOrder?.price ?? 0) * (dataOrder?.liter ?? 0) + (dataOrder?.shippingCost ?? 0);
     SDP.init(context);
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => StatusOrderViewModel(),
@@ -60,7 +71,7 @@ class StatusOrderView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: SDP.sdp(padding)),
                       child: Text(
-                        'Pesanan Dalam Pengiriman',
+                        dataOrder?.status ?? '',
                         style: boldBluePrimaryStyle.copyWith(
                           fontSize: SDP.sdp(textS),
                           fontStyle: FontStyle.italic,
@@ -72,7 +83,10 @@ class StatusOrderView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                         horizontal: SDP.sdp(padding),
                       ),
-                      child: ItemMyFuel(),
+                      child: ItemMyFuel(
+                        name: nameFuel,
+                        oktanNumber: numberOktan,
+                      ),
                     ),
                   ],
                 ),
@@ -84,12 +98,22 @@ class StatusOrderView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      'Nama Pemesan',
+                      style: boldBlackStyle.copyWith(fontSize: SDP.sdp(text)),
+                    ),
+                    verticalSpace(SDP.sdp(5.0)),
+                    Text(
+                      dataOrder?.nameOrder ?? '',
+                      style: regulerGreyStyle.copyWith(fontSize: SDP.sdp(text)),
+                    ),
+                    verticalSpace(SDP.sdp(14.0)),
+                    Text(
                       'Alamat',
                       style: boldBlackStyle.copyWith(fontSize: SDP.sdp(text)),
                     ),
                     verticalSpace(SDP.sdp(5.0)),
                     Text(
-                      'Jalan raya bogor',
+                      dataOrder?.fullAddress ?? '',
                       style: regulerGreyStyle.copyWith(fontSize: SDP.sdp(text)),
                     ),
                     verticalSpace(SDP.sdp(14.0)),
@@ -99,7 +123,7 @@ class StatusOrderView extends StatelessWidget {
                     ),
                     verticalSpace(SDP.sdp(5.0)),
                     Text(
-                      'Cash On Delivery',
+                      dataOrder?.paymentMethod ?? '',
                       style: regulerGreyStyle.copyWith(fontSize: SDP.sdp(text)),
                     ),
                     verticalSpace(SDP.sdp(17.0)),
@@ -139,28 +163,28 @@ class StatusOrderView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              'Rp.12000',
+                              'Rp ${dataOrder?.price.toString()}',
                               style: regulerGreyStyle.copyWith(
                                 fontSize: SDP.sdp(text),
                               ),
                             ),
                             verticalSpace(SDP.sdp(8)),
                             Text(
-                              '2 Liter',
+                              '${dataOrder?.liter.toString()} Liter',
                               style: regulerGreyStyle.copyWith(
                                 fontSize: SDP.sdp(text),
                               ),
                             ),
                             verticalSpace(SDP.sdp(8)),
                             Text(
-                              'Rp.5000',
+                              'Rp.${dataOrder?.shippingCost ?? 0}',
                               style: regulerGreyStyle.copyWith(
                                 fontSize: SDP.sdp(text),
                               ),
                             ),
                             verticalSpace(SDP.sdp(8)),
                             Text(
-                              'Rp.29000',
+                              'Rp.${grandTotal.toString()}',
                               style: boldGreyStyle.copyWith(
                                 fontSize: SDP.sdp(text),
                               ),
@@ -180,6 +204,19 @@ class StatusOrderView extends StatelessWidget {
                   ],
                 ),
               ),
+              verticalSpace(SDP.sdp(30.0)),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                child: Button(
+                  color: BaseColors.primaryBlue,
+                  child: Center(
+                    child: Text(
+                      'Pesanan Diterima',
+                      style: boldWhiteStyle.copyWith(fontSize: SDP.sdp(textS)),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),

@@ -8,8 +8,12 @@ import '../../shared/style.dart';
 import '../../shared/ui_helpers.dart';
 
 class ItemMyFuel extends StatelessWidget {
+  final String name;
+  final String oktanNumber;
   const ItemMyFuel({
     super.key,
+    required this.name,
+    required this.oktanNumber,
   });
 
   @override
@@ -37,11 +41,11 @@ class ItemMyFuel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Bahan Bakar Pertamax',
+                  name,
                   style: boldBlackStyle.copyWith(fontSize: SDP.sdp(textS)),
                 ),
                 Text(
-                  'Oktan Number 92',
+                  'Oktan Number $oktanNumber',
                   style: mediumBluePrimaryStyle.copyWith(fontSize: SDP.sdp(textS)),
                 ),
               ],

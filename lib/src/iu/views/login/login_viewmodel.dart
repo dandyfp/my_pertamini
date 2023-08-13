@@ -12,6 +12,8 @@ import '../../../app/app.locator.dart';
 
 class LoginViewModel extends BaseViewModel with CoreViewModel {
   final AuthService _authService = locator<AuthService>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   bool isObsecure = true;
 
@@ -50,7 +52,7 @@ class LoginViewModel extends BaseViewModel with CoreViewModel {
     });
   }
 
-  void showHomeView() => navigationService.navigateToHomeView();
+  void showHomeView() => navigationService.navigateToMainView();
 
   void showRegisView() => navigationService.navigateToRegisView();
 }

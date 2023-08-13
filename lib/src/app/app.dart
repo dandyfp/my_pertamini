@@ -1,5 +1,6 @@
 import 'package:my_pertamini/src/iu/views/detail_order/detail_order_view.dart';
 import 'package:my_pertamini/src/iu/views/home/home_view.dart';
+import 'package:my_pertamini/src/iu/views/main/main_view.dart';
 import 'package:my_pertamini/src/iu/views/register/regis_view.dart';
 import 'package:my_pertamini/src/services/auth_service.dart';
 import 'package:my_pertamini/src/services/user_service.dart';
@@ -9,6 +10,8 @@ import 'package:stacked_services/stacked_services.dart';
 import '../iu/views/login/login_view.dart';
 import '../iu/views/splash_screen/splash_screen_view.dart';
 import '../iu/views/status_order/status_order_view.dart';
+import '../services/fuel_service.dart';
+import '../services/transaction_service.dart';
 
 @StackedApp(
   routes: [
@@ -18,6 +21,7 @@ import '../iu/views/status_order/status_order_view.dart';
     MaterialRoute(page: SplashScreenView, initial: true),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegisView),
+    MaterialRoute(page: MainView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
@@ -26,6 +30,8 @@ import '../iu/views/status_order/status_order_view.dart';
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: AuthService),
     LazySingleton(classType: UserService),
+    LazySingleton(classType: FuelService),
+    LazySingleton(classType: TransactionService),
   ],
 )
 class AppSetup {

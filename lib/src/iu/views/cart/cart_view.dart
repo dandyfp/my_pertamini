@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_pertamini/src/iu/shared/colors.dart';
+import 'package:my_pertamini/src/iu/shared/dimens.dart';
+import 'package:my_pertamini/src/iu/shared/style.dart';
+import 'package:my_pertamini/src/iu/shared/ui_helpers.dart';
+import 'package:my_pertamini/src/iu/views/cart/cart_viewmodel.dart';
+import 'package:my_pertamini/src/iu/views/widgets/item_transaction.dart';
+import 'package:stacked/stacked.dart';
+
+import '../../../helpers/scalable_dp_helper.dart';
 
 class CartView extends StatelessWidget {
   static const String routeName = "/cart-view";
@@ -6,6 +15,29 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('CART VIEW'));
+    SDP.init(context);
+    return ViewModelBuilder.reactive(
+      viewModelBuilder: () => CartViewmodel(),
+      builder: (context, vm, child) => Scaffold(
+        backgroundColor: BaseColors.white,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: BaseColors.white,
+          title: Text(
+            'Transaksi',
+            style: boldBluePrimaryStyle.copyWith(fontSize: SDP.sdp(headline)),
+          ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+          child: Column(
+            children: [
+              verticalSpace(SDP.sdp(20.0)),
+              ItemTransaction(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

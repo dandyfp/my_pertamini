@@ -12,3 +12,7 @@ const String illustrationLogin = "assets/illustration_login.png";
 const String iconFuel = "assets/icon_fuel.svg";
 const String iconBca = "assets/icon_bca.svg";
 const String iconBri = "assets/icon_bri.svg";
+
+//animation
+const String successAnimation = "assets/animation/animation_success.json";
+const String failedAnimation = "assets/animation/animation_failed.json";

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_pertamini/src/helpers/scalable_dp_helper.dart';
-import 'package:my_pertamini/src/helpers/shared_preferences_helper.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/shared/dimens.dart';
 import 'package:my_pertamini/src/iu/shared/style.dart';
@@ -89,16 +88,20 @@ class HomeView extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
                       child: ListView.builder(
-                        itemCount: 10,
+                        itemCount: vm.fuels.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
+                          var item = vm.fuels[index];
                           return Padding(
                             padding: EdgeInsets.only(bottom: SDP.sdp(10.0)),
                             child: ItemFuel(
+                              name: item.name ?? '',
+                              description: item.description ?? '',
+                              oktanNumber: item.numberOktan.toString(),
                               onTap: () {
-                                SharedPreferencesHelper().clearAll();
-                                vm.showDetailOrderView();
+                                //SharedPreferencesHelper().clearAll();
+                                vm.showDetailOrderView(item, vm.user!.id.toString());
                               },
                             ),
                           );
