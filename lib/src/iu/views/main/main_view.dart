@@ -51,12 +51,12 @@ class _MainViewState extends State<MainView> {
           ),
           BottomNavigationBarItem(
             activeIcon: Icon(
-              Icons.shopping_cart_outlined,
+              Icons.input_outlined,
               color: BaseColors.primaryBlue,
             ),
-            label: 'Keranjang',
+            label: 'Transaction',
             icon: Icon(
-              Icons.shopping_cart_outlined,
+              Icons.input_outlined,
             ),
           ),
           BottomNavigationBarItem(

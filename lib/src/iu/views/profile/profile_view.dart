@@ -8,7 +8,6 @@ import 'package:my_pertamini/src/iu/views/profile/profile_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 import '../widgets/item_my_order.dart';
-import '../widgets/item_transaction.dart';
 
 class ProfileView extends StatelessWidget {
   static const String routeName = "/profile-view";
@@ -219,7 +218,7 @@ class ProfileView extends StatelessWidget {
                               ],
                             ),
                             verticalSpace(SDP.sdp(6.0)),
-                            ItemTransaction(),
+                            //ItemTransaction(),
                             //LottieBuilder.asset(successAnimation)
                           ],
                         ),

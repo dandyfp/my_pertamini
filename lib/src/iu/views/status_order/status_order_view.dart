@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_pertamini/src/helpers/date_time_format.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/shared/ui_helpers.dart';
 import 'package:my_pertamini/src/iu/views/status_order/status_order_viewmodel.dart';
 import 'package:my_pertamini/src/iu/views/widgets/button.dart';
 import 'package:my_pertamini/src/iu/views/widgets/item_my_fuel.dart';
+import 'package:my_pertamini/src/services/request/transaction_req.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../helpers/scalable_dp_helper.dart';
@@ -25,6 +27,7 @@ class StatusOrderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int grandTotal = (dataOrder?.price ?? 0) * (dataOrder?.liter ?? 0) + (dataOrder?.shippingCost ?? 0);
+    String date = FormatDate().formatDate(dataOrder?.createdAt ?? '', format: 'yyyy-MM-dd');
     SDP.init(context);
     return ViewModelBuilder.reactive(
       viewModelBuilder: () => StatusOrderViewModel(),
@@ -126,6 +129,11 @@ class StatusOrderView extends StatelessWidget {
                       dataOrder?.paymentMethod ?? '',
                       style: regulerGreyStyle.copyWith(fontSize: SDP.sdp(text)),
                     ),
+                    verticalSpace(SDP.sdp(5.0)),
+                    Text(
+                      'Tanggal Pesan : $date',
+                      style: boldBlackStyle.copyWith(fontSize: SDP.sdp(text)),
+                    ),
                     verticalSpace(SDP.sdp(17.0)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,6 +216,22 @@ class StatusOrderView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
                 child: Button(
+                  isLoading: vm.isBusy,
+                  onPressed: () {
+                    TransactionReq req = TransactionReq(
+                      idOrder: dataOrder?.id ?? '',
+                      idFuel: dataOrder?.idFuel ?? '',
+                      idUser: dataOrder?.idUser,
+                      amount: grandTotal,
+                      date: date,
+                      transactionPaymentMethod: dataOrder?.paymentMethod ?? '',
+                      typeTransaction: dataOrder?.paymentMethod,
+                      type: 'out',
+                      liter: dataOrder?.liter,
+                      nameFuel: dataOrder?.nameFuel,
+                    );
+                    vm.createTransaction(req);
+                  },
                   color: BaseColors.primaryBlue,
                   child: Center(
                     child: Text(

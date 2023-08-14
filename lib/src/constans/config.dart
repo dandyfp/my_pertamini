@@ -3,4 +3,6 @@ class Config {
   static const baseUrlAndro = 'http://10.0.2.2:8000/api/';
 
   static const String session = 'token';
+
+  static const String localeID = "id_ID";
 }

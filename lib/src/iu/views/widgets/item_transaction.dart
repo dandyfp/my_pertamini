@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_pertamini/src/models/transaction.dart';
 
 import '../../../helpers/scalable_dp_helper.dart';
 import '../../shared/colors.dart';
@@ -7,8 +8,10 @@ import '../../shared/style.dart';
 import '../../shared/ui_helpers.dart';
 
 class ItemTransaction extends StatelessWidget {
+  final Transaction data;
   const ItemTransaction({
     super.key,
+    required this.data,
   });
 
   @override
@@ -40,7 +43,7 @@ class ItemTransaction extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Bahan Bakar',
+                    data.nameFuel ?? '',
                     style: semiBoldBlackStyle.copyWith(
                       fontSize: SDP.sdp(text),
                     ),
@@ -48,14 +51,14 @@ class ItemTransaction extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'Tanggal',
+                        data.date ?? '',
                         style: mediumBlackStyle.copyWith(
                           fontSize: SDP.sdp(textS),
                         ),
                       ),
                       horizontalSpace(SDP.sdp(20.0)),
                       Text(
-                        '1 liter',
+                        '${data.liter} liter',
                         style: mediumBlackStyle.copyWith(
                           fontSize: SDP.sdp(textS),
                         ),
@@ -66,7 +69,7 @@ class ItemTransaction extends StatelessWidget {
               ),
             ),
             Text(
-              'RP 12.000',
+              'RP ${data.amount}',
               style: boldBlackStyle.copyWith(
                 fontSize: SDP.sdp(text),
                 color: BaseColors.red,

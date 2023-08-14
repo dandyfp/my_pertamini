@@ -29,6 +29,8 @@ class Order {
   String? fullAddress;
   @JsonKey(name: "shipping_cost")
   int? shippingCost;
+  @JsonKey(name: "created_at")
+  String? createdAt;
   Order({
     this.id,
     this.idUser,
@@ -46,6 +48,7 @@ class Order {
     this.numberOktan,
     this.fullAddress,
     this.shippingCost,
+    this.createdAt,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);

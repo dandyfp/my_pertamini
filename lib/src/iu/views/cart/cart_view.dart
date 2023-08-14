@@ -30,11 +30,23 @@ class CartView extends StatelessWidget {
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
-          child: Column(
-            children: [
-              verticalSpace(SDP.sdp(20.0)),
-              ItemTransaction(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                verticalSpace(SDP.sdp(20.0)),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: vm.myTransaction.length,
+                  itemBuilder: (context, index) {
+                    var item = vm.myTransaction[index];
+                    return ItemTransaction(
+                      data: item,
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

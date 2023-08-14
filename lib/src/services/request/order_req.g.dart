@@ -16,7 +16,9 @@ OrderReq _$OrderReqFromJson(Map<String, dynamic> json) => OrderReq(
       status: json['status'] as String?,
       price: json['price'] as int?,
       liter: json['liter'] as int?,
-    );
+    )
+      ..type = json['type'] as String?
+      ..nameFuel = json['name_fuel'] as String?;
 
 Map<String, dynamic> _$OrderReqToJson(OrderReq instance) => <String, dynamic>{
       'name_order': instance.nameOrder,
@@ -28,4 +30,6 @@ Map<String, dynamic> _$OrderReqToJson(OrderReq instance) => <String, dynamic>{
       'status': instance.status,
       'price': instance.price,
       'liter': instance.liter,
+      'type': instance.type,
+      'name_fuel': instance.nameFuel,
     };

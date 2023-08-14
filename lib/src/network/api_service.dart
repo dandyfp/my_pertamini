@@ -5,6 +5,7 @@ import 'package:my_pertamini/src/models/detail_user.dart';
 import 'package:my_pertamini/src/models/fuel.dart';
 import 'package:my_pertamini/src/models/order.dart';
 import 'package:my_pertamini/src/models/profile.dart';
+import 'package:my_pertamini/src/models/transaction.dart';
 import 'package:retrofit/http.dart';
 
 import '../helpers/http_helper.dart';
@@ -36,4 +37,10 @@ abstract class ApiService {
 
   @GET('my-order')
   Future<CoreRes<List<Order>>> getMyOrder();
+
+  @POST("create-transaction")
+  Future<CoreRes> createTransaction(@Body() Map<String, dynamic> body);
+
+  @GET("my-transaction")
+  Future<CoreRes<List<Transaction>>> getMytransaction();
 }
