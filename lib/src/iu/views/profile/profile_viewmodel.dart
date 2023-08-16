@@ -57,9 +57,11 @@ class ProfileViewModel extends MultipleFutureViewModel with CoreViewModel {
     required String nameFuel,
     required Order dataOrder,
   }) =>
-      navigationService.navigateToStatusOrderView(
-        nameFuel: nameFuel,
-        numberOktan: numberOktan,
-        dataOrder: dataOrder,
-      );
+      navigationService
+          .navigateToStatusOrderView(
+            nameFuel: nameFuel,
+            numberOktan: numberOktan,
+            dataOrder: dataOrder,
+          )
+          .then((value) => getMyOrder());
 }

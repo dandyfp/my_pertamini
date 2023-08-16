@@ -216,6 +216,7 @@ class StatusOrderView extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
                 child: Button(
+                  isDisabled: dataOrder?.status == 'order received',
                   isLoading: vm.isBusy,
                   onPressed: () {
                     TransactionReq req = TransactionReq(
@@ -226,7 +227,6 @@ class StatusOrderView extends StatelessWidget {
                       date: date,
                       transactionPaymentMethod: dataOrder?.paymentMethod ?? '',
                       typeTransaction: dataOrder?.paymentMethod,
-                      type: 'out',
                       liter: dataOrder?.liter,
                       nameFuel: dataOrder?.nameFuel,
                     );

@@ -56,6 +56,7 @@ class TransactionService extends CoreService {
       typeTransaction: request.typeTransaction,
       nameFuel: request.nameFuel,
       liter: request.liter,
+      type: request.type,
     ).toJson();
     try {
       var result = await apiService.createTransaction(body);

@@ -40,8 +40,11 @@ class CartView extends StatelessWidget {
                   itemCount: vm.myTransaction.length,
                   itemBuilder: (context, index) {
                     var item = vm.myTransaction[index];
-                    return ItemTransaction(
-                      data: item,
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: SDP.sdp(4.0)),
+                      child: ItemTransaction(
+                        data: item,
+                      ),
                     );
                   },
                 )

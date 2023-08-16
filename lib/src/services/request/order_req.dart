@@ -16,7 +16,6 @@ class OrderReq {
   String? status;
   int? price;
   int? liter;
-  String? type;
   @JsonKey(name: 'name_fuel')
   String? nameFuel;
   OrderReq({

@@ -16,6 +16,7 @@ class StatusOrderViewModel extends BaseViewModel with CoreViewModel {
     var result = await _transactionService.createTransaction(req);
     setBusy(false);
     return result.when(success: (CoreRes data) {
+      back();
       _transactionService.snackBarService.showCustomSnackBar(
         message: data.message ?? '',
         variant: SnackbarType.success,
