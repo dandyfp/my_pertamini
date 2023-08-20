@@ -1,3 +1,4 @@
+import 'package:my_pertamini/src/iu/views/cart/cart_view.dart';
 import 'package:my_pertamini/src/iu/views/detail_order/detail_order_view.dart';
 import 'package:my_pertamini/src/iu/views/home/home_view.dart';
 import 'package:my_pertamini/src/iu/views/main/main_view.dart';
@@ -12,6 +13,7 @@ import '../iu/views/splash_screen/splash_screen_view.dart';
 import '../iu/views/status_order/status_order_view.dart';
 import '../services/fuel_service.dart';
 import '../services/transaction_service.dart';
+import '../services/vehicle_service.dart';
 
 @StackedApp(
   routes: [
@@ -22,6 +24,7 @@ import '../services/transaction_service.dart';
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegisView),
     MaterialRoute(page: MainView),
+    MaterialRoute(page: CartView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
@@ -32,6 +35,7 @@ import '../services/transaction_service.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: FuelService),
     LazySingleton(classType: TransactionService),
+    LazySingleton(classType: VehicleService),
   ],
 )
 class AppSetup {

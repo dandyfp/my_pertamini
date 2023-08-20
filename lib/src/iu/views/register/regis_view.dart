@@ -18,12 +18,6 @@ class RegisView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController phoneController = TextEditingController();
-    final TextEditingController confirmPasswordController = TextEditingController();
-
     SDP.init(context);
     return ViewModelBuilder<RegisViewModel>.reactive(
       viewModelBuilder: () => RegisViewModel(),
@@ -78,7 +72,7 @@ class RegisView extends StatelessWidget {
                   ),
                   verticalSpace(SDP.sdp(15.0)),
                   KTextField(
-                    controller: nameController,
+                    controller: vm.nameController,
                     label: Strings.labelFullName,
                     borderColor: BaseColors.hint,
                     placeholder: 'Masukkan Nama Lengkap',
@@ -86,7 +80,7 @@ class RegisView extends StatelessWidget {
                   ),
                   verticalSpace(SDP.sdp(10.0)),
                   KTextField(
-                    controller: emailController,
+                    controller: vm.emailController,
                     label: Strings.labelEmail,
                     borderColor: BaseColors.hint,
                     placeholder: 'Masukkan Email',
@@ -94,15 +88,16 @@ class RegisView extends StatelessWidget {
                   ),
                   verticalSpace(SDP.sdp(10.0)),
                   KTextField(
-                    controller: phoneController,
+                    controller: vm.phoneController,
                     label: Strings.labelPhone,
                     borderColor: BaseColors.hint,
                     placeholder: 'Masukkan Nomor',
                     borderRadius: SDP.sdp(8.0),
+                    keyboardType: TextInputType.number,
                   ),
                   verticalSpace(SDP.sdp(10.0)),
                   KTextField(
-                    controller: passwordController,
+                    controller: vm.passwordController,
                     label: Strings.labelPassword,
                     borderColor: BaseColors.hint,
                     placeholder: 'Masukkan Kata Sandi',
@@ -118,7 +113,7 @@ class RegisView extends StatelessWidget {
                   ),
                   verticalSpace(SDP.sdp(10.0)),
                   KTextField(
-                    controller: confirmPasswordController,
+                    controller: vm.confirmPasswordController,
                     label: 'Konfirmasi Password',
                     borderColor: BaseColors.hint,
                     placeholder: 'Masukkan Ulang Kata Sandi',
@@ -135,10 +130,10 @@ class RegisView extends StatelessWidget {
                   Button(
                     isLoading: vm.isBusy,
                     onPressed: () => vm.register(
-                      confirmPassword: confirmPasswordController.text,
-                      name: nameController.text,
-                      email: emailController.text,
-                      password: passwordController.text,
+                      confirmPassword: vm.confirmPasswordController.text,
+                      name: vm.nameController.text,
+                      email: vm.emailController.text,
+                      password: vm.passwordController.text,
                       context: context,
                     ),
                     color: BaseColors.primaryBlue,

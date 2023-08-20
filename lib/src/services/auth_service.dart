@@ -72,7 +72,7 @@ class AuthService extends CoreService {
         confirmPassword: confirmPassword,
       ).toJson();
       final response = await dio.post(
-        "${Config.baseUrl}register",
+        "${Config.baseUrlOnline}register",
         data: formData,
       );
       CoreRes data = CoreRes.fromJson(response.data, (json) => null);

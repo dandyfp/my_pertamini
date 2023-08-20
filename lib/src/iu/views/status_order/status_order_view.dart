@@ -213,34 +213,68 @@ class StatusOrderView extends StatelessWidget {
                 ),
               ),
               verticalSpace(SDP.sdp(30.0)),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
-                child: Button(
-                  isDisabled: dataOrder?.status == 'order received',
-                  isLoading: vm.isBusy,
-                  onPressed: () {
-                    TransactionReq req = TransactionReq(
-                      idOrder: dataOrder?.id ?? '',
-                      idFuel: dataOrder?.idFuel ?? '',
-                      idUser: dataOrder?.idUser,
-                      amount: grandTotal,
-                      date: date,
-                      transactionPaymentMethod: dataOrder?.paymentMethod ?? '',
-                      typeTransaction: dataOrder?.paymentMethod,
-                      liter: dataOrder?.liter,
-                      nameFuel: dataOrder?.nameFuel,
-                    );
-                    vm.createTransaction(req);
-                  },
-                  color: BaseColors.primaryBlue,
-                  child: Center(
-                    child: Text(
-                      'Pesanan Diterima',
-                      style: boldWhiteStyle.copyWith(fontSize: SDP.sdp(textS)),
-                    ),
-                  ),
-                ),
-              )
+              vm.user?.type != 'admin'
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                      child: Column(
+                        children: [
+                          Button(
+                            isDisabled: dataOrder?.status == 'order received',
+                            isLoading: vm.isBusy,
+                            onPressed: () {
+                              TransactionReq req = TransactionReq(
+                                idOrder: dataOrder?.id ?? '',
+                                idFuel: dataOrder?.idFuel ?? '',
+                                idUser: dataOrder?.idUser,
+                                amount: grandTotal,
+                                date: date,
+                                transactionPaymentMethod: dataOrder?.paymentMethod ?? '',
+                                typeTransaction: dataOrder?.paymentMethod,
+                                liter: dataOrder?.liter,
+                                nameFuel: dataOrder?.nameFuel,
+                              );
+                              vm.createTransaction(req);
+                            },
+                            color: BaseColors.primaryBlue,
+                            child: Center(
+                              child: Text(
+                                'Pesanan Diterima',
+                                style: boldWhiteStyle.copyWith(fontSize: SDP.sdp(textS)),
+                              ),
+                            ),
+                          ),
+                          verticalSpace(SDP.sdp(20.0)),
+                          Text(
+                            'Silahkan klik Pesana Diterima jika anda sudah menerima pesanan',
+                            style: boldBlackStyle.copyWith(
+                              fontSize: SDP.sdp(textS),
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                      child: Button(
+                        isLoading: vm.isBusy,
+                        isDisabled: dataOrder?.status != 'on prosses',
+                        onPressed: () {
+                          vm.updateStatusOrder(id: dataOrder?.id ?? '', status: 'on delivery');
+                        },
+                        color: BaseColors.primaryBlue,
+                        child: Center(
+                          child: Text(
+                            dataOrder?.status == 'order received'
+                                ? 'Pesanan Sudah Diterima'
+                                : dataOrder?.status == 'on prosses'
+                                    ? 'Kirim Pesanan'
+                                    : 'Pesanan Sedang Dikirim',
+                            style: boldWhiteStyle.copyWith(fontSize: SDP.sdp(textS)),
+                          ),
+                        ),
+                      ),
+                    )
             ],
           ),
         ),

@@ -11,7 +11,9 @@ import '../../../helpers/scalable_dp_helper.dart';
 
 class CartView extends StatelessWidget {
   static const String routeName = "/cart-view";
-  const CartView({super.key});
+  const CartView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,37 +23,84 @@ class CartView extends StatelessWidget {
       builder: (context, vm, child) => Scaffold(
         backgroundColor: BaseColors.white,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
-          backgroundColor: BaseColors.white,
+          backgroundColor: BaseColors.primaryBlue,
           title: Text(
             'Transaksi',
-            style: boldBluePrimaryStyle.copyWith(fontSize: SDP.sdp(headline)),
+            style: boldWhiteStyle.copyWith(fontSize: SDP.sdp(headline)),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                verticalSpace(SDP.sdp(20.0)),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: vm.myTransaction.length,
-                  itemBuilder: (context, index) {
-                    var item = vm.myTransaction[index];
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: SDP.sdp(4.0)),
-                      child: ItemTransaction(
-                        data: item,
-                      ),
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
-        ),
+        body: vm.isBusy
+            ? Center(child: showLoading)
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                child: SingleChildScrollView(
+                  child: vm.user?.type != 'admin'
+                      ? Column(
+                          children: [
+                            verticalSpace(SDP.sdp(20.0)),
+                            vm.myTransaction.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      'Belum ada transaksi',
+                                      style: mediumBlackStyle.copyWith(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: SDP.sdp(text),
+                                      ),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: vm.myTransaction.length,
+                                    itemBuilder: (context, index) {
+                                      var item = vm.myTransaction[index];
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: SDP.sdp(4.0)),
+                                        child: ItemTransaction(
+                                          data: item,
+                                          admin: vm.user?.type ?? '',
+                                          nameOrder: item.user?.name ?? '',
+                                        ),
+                                      );
+                                    },
+                                  )
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            verticalSpace(SDP.sdp(20.0)),
+                            vm.allTransaction.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      'Belum ada transaksi',
+                                      style: mediumBlackStyle.copyWith(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: SDP.sdp(text),
+                                      ),
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: vm.allTransaction.length,
+                                    itemBuilder: (context, index) {
+                                      var item = vm.allTransaction[index];
+                                      return Padding(
+                                        padding: EdgeInsets.only(bottom: SDP.sdp(4.0)),
+                                        child: ItemTransaction(
+                                          data: item,
+                                          nameOrder: item.user?.name ?? "",
+                                          admin: vm.user?.type,
+                                        ),
+                                      );
+                                    },
+                                  )
+                          ],
+                        ),
+                ),
+              ),
       ),
     );
   }

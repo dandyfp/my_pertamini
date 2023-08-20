@@ -5,7 +5,7 @@ part 'transaction_req.g.dart';
 @JsonSerializable()
 class TransactionReq {
   String? id;
-  @JsonKey(name: 'id_user')
+  @JsonKey(name: 'user_id')
   String? idUser;
   @JsonKey(name: 'id_order')
   String? idOrder;
@@ -21,6 +21,7 @@ class TransactionReq {
   String? type;
   @JsonKey(name: 'name_fuel')
   String? nameFuel;
+  String? status;
   TransactionReq({
     this.id,
     this.idUser,
@@ -33,6 +34,7 @@ class TransactionReq {
     this.liter,
     this.type,
     this.nameFuel,
+    this.status,
   });
 
   factory TransactionReq.fromJson(Map<String, dynamic> json) => _$TransactionReqFromJson(json);

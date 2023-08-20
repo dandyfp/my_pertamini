@@ -8,7 +8,10 @@ part of 'transaction.dart';
 
 Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
       id: json['id'] as String?,
-      idUser: json['id_user'] as String?,
+      user: json['user'] == null
+          ? null
+          : DetailUser.fromJson(json['user'] as Map<String, dynamic>),
+      idUser: json['user_id'] as String?,
       idOrder: json['id_order'] as String?,
       idFuel: json['id_fuel'] as String?,
       typeTransaction: json['type_transaction'] as String?,
@@ -23,7 +26,7 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
 Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'id_user': instance.idUser,
+      'user_id': instance.idUser,
       'id_order': instance.idOrder,
       'id_fuel': instance.idFuel,
       'type_transaction': instance.typeTransaction,
@@ -33,4 +36,5 @@ Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
       'name_fuel': instance.nameFuel,
       'liter': instance.liter,
       'type': instance.type,
+      'user': instance.user,
     };

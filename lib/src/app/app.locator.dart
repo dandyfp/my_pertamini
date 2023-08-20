@@ -16,6 +16,7 @@ import '../services/auth_service.dart';
 import '../services/fuel_service.dart';
 import '../services/transaction_service.dart';
 import '../services/user_service.dart';
+import '../services/vehicle_service.dart';
 
 final locator = StackedLocator.instance;
 
@@ -36,4 +37,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => FuelService());
   locator.registerLazySingleton(() => TransactionService());
+  locator.registerLazySingleton(() => VehicleService());
 }

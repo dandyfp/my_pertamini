@@ -14,13 +14,24 @@ class ItemFuel extends StatelessWidget {
   final String description;
   final String oktanNumber;
   final int? price;
+  final VoidCallback? onTapDelete;
+  final VoidCallback? onTapEdit;
+  final bool isAdmin;
+  final bool? isLoadingDelete;
+  final bool? isLoadingEdit;
+
   const ItemFuel({
     Key? key,
     required this.onTap,
     required this.name,
     required this.description,
     required this.oktanNumber,
+    required this.isAdmin,
+    this.onTapEdit,
+    this.onTapDelete,
     this.price,
+    this.isLoadingDelete,
+    this.isLoadingEdit,
   }) : super(key: key);
 
   @override
@@ -91,19 +102,62 @@ class ItemFuel extends StatelessWidget {
               ],
             ),
             verticalSpace(SDP.sdp(14.0)),
-            Button(
-              onPressed: onTap,
-              color: BaseColors.primaryBlue,
-              borderRadius: BorderRadius.circular(SDP.sdp(4)),
-              child: Center(
-                child: Text(
-                  'Pilih',
-                  style: mediumWhiteStyle.copyWith(
-                    fontSize: SDP.sdp(textS),
+            if (isAdmin == false)
+              Button(
+                onPressed: onTap,
+                color: BaseColors.primaryBlue,
+                borderRadius: BorderRadius.circular(SDP.sdp(4)),
+                child: Center(
+                  child: Text(
+                    'Pilih',
+                    style: mediumWhiteStyle.copyWith(
+                      fontSize: SDP.sdp(textS),
+                    ),
                   ),
                 ),
               ),
-            ),
+            verticalSpace(SDP.sdp(6.0)),
+            if (isAdmin == true)
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Button(
+                      isLoading: isLoadingDelete ?? false,
+                      onPressed: onTapDelete,
+                      color: BaseColors.white,
+                      border: Border.all(color: BaseColors.primaryBlue),
+                      borderRadius: BorderRadius.circular(SDP.sdp(4)),
+                      child: Center(
+                        child: Text(
+                          'Hapus',
+                          style: mediumBluePrimaryStyle.copyWith(
+                            fontSize: SDP.sdp(textS),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  horizontalSpace(SDP.sdp(6.0)),
+                  Expanded(
+                    flex: 1,
+                    child: Button(
+                      isLoading: isLoadingEdit ?? false,
+                      onPressed: onTapEdit,
+                      color: BaseColors.primaryBlue,
+                      borderRadius: BorderRadius.circular(SDP.sdp(4)),
+                      child: Center(
+                        child: Text(
+                          'Edit',
+                          style: mediumWhiteStyle.copyWith(
+                            fontSize: SDP.sdp(textS),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),

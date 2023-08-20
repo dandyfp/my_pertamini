@@ -9,7 +9,7 @@ part of 'transaction_req.dart';
 TransactionReq _$TransactionReqFromJson(Map<String, dynamic> json) =>
     TransactionReq(
       id: json['id'] as String?,
-      idUser: json['id_user'] as String?,
+      idUser: json['user_id'] as String?,
       idOrder: json['id_order'] as String?,
       idFuel: json['id_fuel'] as String?,
       typeTransaction: json['type_transaction'] as String?,
@@ -19,12 +19,13 @@ TransactionReq _$TransactionReqFromJson(Map<String, dynamic> json) =>
       liter: json['liter'] as int?,
       type: json['type'] as String?,
       nameFuel: json['name_fuel'] as String?,
+      status: json['status'] as String?,
     );
 
 Map<String, dynamic> _$TransactionReqToJson(TransactionReq instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'id_user': instance.idUser,
+      'user_id': instance.idUser,
       'id_order': instance.idOrder,
       'id_fuel': instance.idFuel,
       'type_transaction': instance.typeTransaction,
@@ -34,4 +35,5 @@ Map<String, dynamic> _$TransactionReqToJson(TransactionReq instance) =>
       'liter': instance.liter,
       'type': instance.type,
       'name_fuel': instance.nameFuel,
+      'status': instance.status,
     };

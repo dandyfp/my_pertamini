@@ -6,6 +6,7 @@ import 'package:my_pertamini/src/network/api_result.dart';
 import 'package:my_pertamini/src/network/network_exceptions.dart';
 import 'package:my_pertamini/src/services/request/order_req.dart';
 import 'package:my_pertamini/src/services/request/transaction_req.dart';
+import 'package:my_pertamini/src/services/request/update_status_req.dart';
 
 class TransactionService extends CoreService {
   Future<ApiResult<CoreRes>> creteOrder({
@@ -44,6 +45,30 @@ class TransactionService extends CoreService {
     }
   }
 
+  Future<ApiResult<CoreRes<List<Order>>>> fetchOrderReceived() async {
+    try {
+      var result = await apiService.getOrderReceiped();
+      return ApiResult.success(data: result);
+    } catch (e) {
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
+        coreRes: NetworkExceptions.getErrorRes(e),
+      );
+    }
+  }
+
+  Future<ApiResult<CoreRes<List<Order>>>> fetchOrderOnProcess() async {
+    try {
+      var result = await apiService.getOrderOnProcess();
+      return ApiResult.success(data: result);
+    } catch (e) {
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
+        coreRes: NetworkExceptions.getErrorRes(e),
+      );
+    }
+  }
+
   Future<ApiResult<CoreRes>> createTransaction(TransactionReq request) async {
     Map<String, dynamic> body = TransactionReq(
       idFuel: request.idFuel,
@@ -57,6 +82,7 @@ class TransactionService extends CoreService {
       nameFuel: request.nameFuel,
       liter: request.liter,
       type: request.type,
+      status: 'order received',
     ).toJson();
     try {
       var result = await apiService.createTransaction(body);
@@ -69,6 +95,31 @@ class TransactionService extends CoreService {
   Future<ApiResult<CoreRes<List<Transaction>>>> fetchMyTransaction() async {
     try {
       var result = await apiService.getMytransaction();
+      return ApiResult.success(data: result);
+    } catch (e) {
+      return ApiResult.failure(error: NetworkExceptions.getDioException(e), coreRes: NetworkExceptions.getErrorRes(e));
+    }
+  }
+
+  Future<ApiResult<CoreRes<List<Transaction>>>> fetchAllTransaction() async {
+    try {
+      var result = await apiService.getAlltransaction();
+      return ApiResult.success(data: result);
+    } catch (e) {
+      return ApiResult.failure(error: NetworkExceptions.getDioException(e), coreRes: NetworkExceptions.getErrorRes(e));
+    }
+  }
+
+  Future<ApiResult<CoreRes>> updateStatus({
+    required String id,
+    required String status,
+  }) async {
+    try {
+      Map<String, dynamic> body = UpdateStatusReq(
+        id: id,
+        status: status,
+      ).toJson();
+      var result = await apiService.updateStatusOrder(body);
       return ApiResult.success(data: result);
     } catch (e) {
       return ApiResult.failure(error: NetworkExceptions.getDioException(e), coreRes: NetworkExceptions.getErrorRes(e));

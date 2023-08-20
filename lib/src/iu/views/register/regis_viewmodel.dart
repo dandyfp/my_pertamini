@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_pertamini/src/app/app.locator.dart';
+import 'package:my_pertamini/src/core/core_view_model.dart';
 import 'package:my_pertamini/src/enum/snackbar_type.dart';
 import 'package:stacked/stacked.dart';
 
@@ -8,12 +9,18 @@ import '../../../network/network_exceptions.dart';
 import '../../../network/result_state.dart';
 import '../../../services/auth_service.dart';
 
-class RegisViewModel extends BaseViewModel {
+class RegisViewModel extends BaseViewModel with CoreViewModel {
   final AuthService _authService = locator<AuthService>();
 
   bool isObsecure = true;
   bool isObsecureConfimPass = true;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   Future<ResultState<CoreRes>> register({
     required String name,
@@ -31,6 +38,7 @@ class RegisViewModel extends BaseViewModel {
     );
     setBusy(false);
     return result.when(success: (CoreRes data) {
+      back();
       _authService.snackBarService.showCustomSnackBar(
         variant: SnackbarType.success,
         message: data.message ?? '',

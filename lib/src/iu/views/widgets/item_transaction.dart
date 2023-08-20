@@ -8,16 +8,20 @@ import '../../shared/style.dart';
 import '../../shared/ui_helpers.dart';
 
 class ItemTransaction extends StatelessWidget {
+  final String? admin;
+  final String? nameOrder;
   final Transaction data;
   const ItemTransaction({
     super.key,
     required this.data,
+    this.admin,
+    this.nameOrder,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SDP.sdp(60.0),
+      //height: admin != 'admin' ? SDP.sdp(60.0) : SDP.sdp(100.0),
       width: screenWidth(context),
       decoration: BoxDecoration(
         color: BaseColors.grey.withOpacity(0.2),
@@ -65,6 +69,13 @@ class ItemTransaction extends StatelessWidget {
                       ),
                     ],
                   ),
+                  if (admin == 'admin')
+                    Text(
+                      'Nama Pemesan : $nameOrder',
+                      style: boldBlackStyle.copyWith(
+                        fontSize: SDP.sdp(10),
+                      ),
+                    )
                 ],
               ),
             ),

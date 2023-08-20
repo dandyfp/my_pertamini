@@ -5,7 +5,7 @@ part 'order.g.dart';
 @JsonSerializable()
 class Order {
   String? id;
-  @JsonKey(name: "id_user")
+  @JsonKey(name: "user_id")
   String? idUser;
   @JsonKey(name: "id_fuel")
   String? idFuel;

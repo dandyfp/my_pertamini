@@ -1,11 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:my_pertamini/src/models/detail_user.dart';
 
 part 'transaction.g.dart';
 
 @JsonSerializable()
 class Transaction {
   String? id;
-  @JsonKey(name: 'id_user')
+  @JsonKey(name: 'user_id')
   String? idUser;
   @JsonKey(name: 'id_order')
   String? idOrder;
@@ -21,8 +22,10 @@ class Transaction {
   String? nameFuel;
   int? liter;
   String? type;
+  DetailUser? user;
   Transaction({
     this.id,
+    this.user,
     this.idUser,
     this.idOrder,
     this.idFuel,

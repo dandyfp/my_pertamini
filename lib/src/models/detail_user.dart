@@ -13,9 +13,12 @@ class DetailUser {
   String? createdAt;
   @JsonKey(name: 'updated_at')
   String? updatedAt;
+
+  String? type;
   DetailUser({
     this.id,
     this.name,
+    this.type,
     this.email,
     this.emailVerifiedAt,
     this.createdAt,
