@@ -89,62 +89,153 @@ class HomeView extends StatelessWidget {
                       ),
                     ),
                     verticalSpace(SDP.sdp(30.0)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
-                      child: ListView.builder(
-                        itemCount: vm.fuels.length,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          var item = vm.fuels[index];
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: SDP.sdp(10.0)),
-                            child: ItemFuel(
-                              onTapEdit: () => vm.getDetailFuel(item.id ?? ''),
-                              isLoadingDelete: vm.isLoadingDelete,
-                              isLoadingEdit: vm.isLoadingEdit,
-                              onTapDelete: () => vm.deleteFuel(item.id ?? ''),
-                              isAdmin: vm.isAdmin,
-                              name: item.name ?? '',
-                              description: item.description ?? '',
-                              oktanNumber: item.numberOktan.toString(),
-                              onTap: () {
-                                //SharedPreferencesHelper().clearAll();
-                                vm.showDetailOrderView(item, vm.user!.id.toString());
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    verticalSpace(SDP.sdp(10.0)),
                     if (vm.user?.type == 'admin')
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
-                        child: Button(
-                          onPressed: () {
-                            vm.clearData();
-                            FuelReq req = FuelReq(
-                              name: vm.nameFuelController.text,
-                              numberOktan: int.tryParse(vm.numberOktanController.text),
-                              description: vm.descriptionController.text,
-                              price: int.tryParse(vm.priceController.text),
-                            );
-                            vm.showBottomSheetCreateFuel(req: req, isEdit: false);
-                          },
-                          color: BaseColors.white,
-                          border: Border.all(color: BaseColors.primaryBlue),
-                          borderRadius: BorderRadius.circular(SDP.sdp(4)),
-                          child: Center(
-                            child: Text(
-                              'Tambah Bahan Bakar',
-                              style: mediumBluePrimaryStyle.copyWith(
-                                fontSize: SDP.sdp(textS),
-                              ),
-                            ),
-                          ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () => vm.showPosView(),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: BaseColors.primaryBlue.withOpacity(0.3),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(SDP.sdp(25.0)),
+                                      child: Text(
+                                        'Laporan',
+                                        style: boldBluePrimaryStyle.copyWith(
+                                          fontSize: SDP.sdp(headline),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      enableDrag: true,
+                                      isScrollControlled: true,
+                                      isDismissible: true,
+                                      backgroundColor: BaseColors.white,
+                                      context: context,
+                                      builder: (context) {
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                                              child: ListView.builder(
+                                                itemCount: vm.fuels.length,
+                                                shrinkWrap: true,
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                itemBuilder: (context, index) {
+                                                  var item = vm.fuels[index];
+                                                  return Padding(
+                                                    padding: EdgeInsets.only(bottom: SDP.sdp(10.0)),
+                                                    child: ItemFuel(
+                                                      onTapEdit: () => vm.getDetailFuel(item.id ?? ''),
+                                                      isLoadingDelete: vm.isLoadingDelete,
+                                                      isLoadingEdit: vm.isLoadingEdit,
+                                                      onTapDelete: () => vm.deleteFuel(item.id ?? ''),
+                                                      isAdmin: vm.isAdmin,
+                                                      name: item.name ?? '',
+                                                      description: item.description ?? '',
+                                                      oktanNumber: item.numberOktan.toString(),
+                                                      onTap: () {
+                                                        //SharedPreferencesHelper().clearAll();
+                                                        vm.showDetailOrderView(item, vm.user!.id.toString());
+                                                      },
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            if (vm.user?.type == 'admin')
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                                                child: Button(
+                                                  onPressed: () {
+                                                    vm.clearData();
+                                                    FuelReq req = FuelReq(
+                                                      name: vm.nameFuelController.text,
+                                                      numberOktan: int.tryParse(vm.numberOktanController.text),
+                                                      description: vm.descriptionController.text,
+                                                      price: int.tryParse(vm.priceController.text),
+                                                    );
+                                                    vm.showBottomSheetCreateFuel(req: req, isEdit: false);
+                                                  },
+                                                  color: BaseColors.white,
+                                                  border: Border.all(color: BaseColors.primaryBlue),
+                                                  borderRadius: BorderRadius.circular(SDP.sdp(4)),
+                                                  child: Center(
+                                                    child: Text(
+                                                      'Tambah Bahan Bakar',
+                                                      style: mediumBluePrimaryStyle.copyWith(
+                                                        fontSize: SDP.sdp(textS),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: BaseColors.primaryBlue.withOpacity(0.3),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(SDP.sdp(25.0)),
+                                      child: Text(
+                                        'Data BBM',
+                                        style: boldBluePrimaryStyle.copyWith(
+                                          fontSize: SDP.sdp(headline),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
                       ),
+                    if (vm.user?.type != 'admin')
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: SDP.sdp(padding)),
+                        child: ListView.builder(
+                          itemCount: vm.fuels.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            var item = vm.fuels[index];
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: SDP.sdp(10.0)),
+                              child: ItemFuel(
+                                onTapEdit: () => vm.getDetailFuel(item.id ?? ''),
+                                isLoadingDelete: vm.isLoadingDelete,
+                                isLoadingEdit: vm.isLoadingEdit,
+                                onTapDelete: () => vm.deleteFuel(item.id ?? ''),
+                                isAdmin: vm.isAdmin,
+                                name: item.name ?? '',
+                                description: item.description ?? '',
+                                oktanNumber: item.numberOktan.toString(),
+                                onTap: () {
+                                  //SharedPreferencesHelper().clearAll();
+                                  vm.showDetailOrderView(item, vm.user!.id.toString());
+                                },
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    verticalSpace(SDP.sdp(10.0)),
                   ],
                 ),
               ),
@@ -257,6 +348,24 @@ class BottomSheetCreateFuel extends StatelessWidget {
               controller: vm.priceController,
               validator: Validator.requiredValidator,
             ),
+            Text(
+              'Stock BBM',
+              style: mediumBlackStyle.copyWith(
+                fontSize: SDP.sdp(text),
+              ),
+            ),
+            verticalSpace(SDP.sdp(4.0)),
+            KTextField(
+              maxLines: 1,
+              borderColor: BaseColors.grey,
+              isDense: true,
+              borderRadius: SDP.sdp(8.0),
+              placeholder: 'Masukan jumlah stock',
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.number,
+              controller: vm.stockController,
+              validator: Validator.requiredValidator,
+            ),
             verticalSpace(SDP.sdp(30.0)),
             Button(
               isLoading: vm.isLoadingCreate || vm.isLoadingEdit,
@@ -266,6 +375,7 @@ class BottomSheetCreateFuel extends StatelessWidget {
                   numberOktan: int.tryParse(vm.numberOktanController.text),
                   description: vm.descriptionController.text,
                   price: int.tryParse(vm.priceController.text),
+                  stock: int.tryParse(vm.stockController.text),
                 );
                 isEdit == false ? vm.createFuel(request) : vm.updateFuel(req: request, id: id);
               },

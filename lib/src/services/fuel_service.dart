@@ -17,6 +17,7 @@ class FuelService extends CoreService {
         description: req.description,
         numberOktan: req.numberOktan,
         price: req.price,
+        stock: req.stock,
       ).toJson();
       var result = await apiService.updateFuel(body, id);
       return ApiResult.success(data: result);
@@ -35,6 +36,7 @@ class FuelService extends CoreService {
         description: req.description,
         numberOktan: req.numberOktan,
         price: req.price,
+        stock: req.stock,
       ).toJson();
       var result = await apiService.createFuel(body);
       return ApiResult.success(data: result);

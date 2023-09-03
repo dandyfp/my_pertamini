@@ -6,7 +6,6 @@ import 'package:my_pertamini/src/helpers/setup_dialog.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/views/cart/cart_view.dart';
 import 'package:my_pertamini/src/iu/views/login/login_view.dart';
-import 'package:my_pertamini/src/iu/views/main/main_view.dart';
 import 'package:my_pertamini/src/iu/views/profile/profile_view.dart';
 import 'package:my_pertamini/src/iu/views/register/regis_view.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       // home: const LandingView(),
       routes: {
         LoginView.routeName: (context) => const LoginView(),
-        MainView.routeName: (context) => const MainView(),
+        // MainView.routeName: (context) => const MainView(),
         CartView.routeName: (context) => const CartView(),
         RegisView.routeName: (context) => const RegisView(),
         ProfileView.routeName: (context) => const ProfileView(),

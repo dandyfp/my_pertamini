@@ -167,5 +167,12 @@ class ProfileViewModel extends MultipleFutureViewModel with CoreViewModel {
     getOrderReceived();
   }
 
+  Future<void> onRefresh() async {
+    getMyOrder();
+    getMyTransaction();
+    getOrderOnProcess();
+    getOrderReceived();
+  }
+
   void showCartView() => navigationService.navigateToCartView();
 }

@@ -12,6 +12,7 @@ Fuel _$FuelFromJson(Map<String, dynamic> json) => Fuel(
       description: json['description'] as String?,
       price: json['price'] as int?,
       numberOktan: json['number_oktan'] as int?,
+      stock: json['stock'] as int?,
     );
 
 Map<String, dynamic> _$FuelToJson(Fuel instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$FuelToJson(Fuel instance) => <String, dynamic>{
       'description': instance.description,
       'price': instance.price,
       'number_oktan': instance.numberOktan,
+      'stock': instance.stock,
     };

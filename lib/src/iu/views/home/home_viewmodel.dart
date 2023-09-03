@@ -30,6 +30,7 @@ class HomeViewModel extends MultipleFutureViewModel with CoreViewModel {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController numberOktanController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
+  final TextEditingController stockController = TextEditingController();
 
   DetailUser? user;
 
@@ -150,6 +151,7 @@ class HomeViewModel extends MultipleFutureViewModel with CoreViewModel {
       numberOktanController.text = data.data?.numberOktan.toString() ?? '';
       descriptionController.text = data.data?.description ?? '';
       priceController.text = data.data!.price.toString();
+      stockController.text = data.data!.stock.toString();
       FuelReq req = FuelReq(
         name: data.data?.name ?? '',
         numberOktan: data.data?.numberOktan,
@@ -198,5 +200,12 @@ class HomeViewModel extends MultipleFutureViewModel with CoreViewModel {
     numberOktanController.clear();
   }
 
-  void showDetailOrderView(Fuel fuel, String idUser) => navigationService.navigateToDetailOrderView(idUser: idUser, fuel: fuel);
+  void showUserOrderView() => navigationService.navigateToUserOrderView();
+
+  void showDetailOrderView(Fuel fuel, String idUser) => navigationService.navigateToDetailOrderView(
+        idUser: idUser,
+        fuel: fuel,
+      );
+
+  void showPosView() => navigationService.navigateToPosView();
 }

@@ -9,11 +9,13 @@ class FuelReq {
   @JsonKey(name: "number_oktan")
   int? numberOktan;
   int? price;
+  int? stock;
   FuelReq({
     this.name,
     this.description,
     this.numberOktan,
     this.price,
+    this.stock,
   });
 
   factory FuelReq.fromJson(Map<String, dynamic> json) => _$FuelReqFromJson(json);

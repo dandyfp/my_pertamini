@@ -3,11 +3,16 @@ import 'package:my_pertamini/src/helpers/scalable_dp_helper.dart';
 import 'package:my_pertamini/src/iu/shared/colors.dart';
 import 'package:my_pertamini/src/iu/views/cart/cart_view.dart';
 import 'package:my_pertamini/src/iu/views/home/home_view.dart';
+import 'package:my_pertamini/src/iu/views/pos/pos_view.dart';
 import 'package:my_pertamini/src/iu/views/profile/profile_view.dart';
 
 class MainView extends StatefulWidget {
   static const String routeName = "/main-view";
-  const MainView({super.key});
+  final String admin;
+  const MainView({
+    super.key,
+    required this.admin,
+  });
 
   @override
   State<MainView> createState() => _MainViewState();
@@ -26,6 +31,11 @@ class _MainViewState extends State<MainView> {
     const CartView(),
     const ProfileView(),
   ];
+  List<Widget> pagesAdmin = <Widget>[
+    const HomeView(),
+    const PosView(),
+    const ProfileView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +43,13 @@ class _MainViewState extends State<MainView> {
 
     return Scaffold(
       body: Center(
-        child: pages.elementAt(_selectedIndex),
+        child: widget.admin == 'admin' ? pagesAdmin.elementAt(_selectedIndex) : pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.home,
               color: BaseColors.primaryBlue,
@@ -51,15 +61,15 @@ class _MainViewState extends State<MainView> {
           ),
           BottomNavigationBarItem(
             activeIcon: Icon(
-              Icons.input_outlined,
+              widget.admin == 'admin' ? Icons.post_add : Icons.input_outlined,
               color: BaseColors.primaryBlue,
             ),
-            label: 'Transaction',
+            label: widget.admin == 'admin' ? 'Laporan' : 'Transaction',
             icon: Icon(
-              Icons.input_outlined,
+              widget.admin == 'admin' ? Icons.post_add : Icons.input_outlined,
             ),
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.emoji_people_sharp,
               color: BaseColors.primaryBlue,

@@ -42,6 +42,12 @@ abstract class ApiService {
   @GET('my-order-received')
   Future<CoreRes<List<Order>>> getOrderReceiped();
 
+  @GET('all-order')
+  Future<CoreRes<List<Order>>> getAllOrder();
+
+  @GET("all-transaction-fuel/{idFuel}")
+  Future<CoreRes<List<Transaction>>> getTransactionFuel(@Path("idFuel") String? idFuel);
+
   @GET('my-order-on-processed')
   Future<CoreRes<List<Order>>> getOrderOnProcess();
 

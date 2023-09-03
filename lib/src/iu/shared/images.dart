@@ -7,6 +7,10 @@ const String logoBca = "assets/logo_bca.png";
 const String logoBri = "assets/logo_bri.png";
 const String logo = "assets/logo.png";
 const String illustrationLogin = "assets/illustration_login.png";
+const String logoPosPeople = "assets/pos_people.png";
+const String logoPosTransaction = "assets/pos_transaction.png";
+const String logoPosFuel = "assets/pos_fuel.png";
+const String logoPosDelivery = "assets/pos_delivery.png";
 // Icons
 
 const String iconFuel = "assets/icon_fuel.svg";

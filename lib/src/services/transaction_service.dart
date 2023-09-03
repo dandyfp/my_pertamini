@@ -69,6 +69,18 @@ class TransactionService extends CoreService {
     }
   }
 
+  Future<ApiResult<CoreRes<List<Order>>>> fetchAllOrder() async {
+    try {
+      var result = await apiService.getAllOrder();
+      return ApiResult.success(data: result);
+    } catch (e) {
+      return ApiResult.failure(
+        error: NetworkExceptions.getDioException(e),
+        coreRes: NetworkExceptions.getErrorRes(e),
+      );
+    }
+  }
+
   Future<ApiResult<CoreRes>> createTransaction(TransactionReq request) async {
     Map<String, dynamic> body = TransactionReq(
       idFuel: request.idFuel,
@@ -95,6 +107,15 @@ class TransactionService extends CoreService {
   Future<ApiResult<CoreRes<List<Transaction>>>> fetchMyTransaction() async {
     try {
       var result = await apiService.getMytransaction();
+      return ApiResult.success(data: result);
+    } catch (e) {
+      return ApiResult.failure(error: NetworkExceptions.getDioException(e), coreRes: NetworkExceptions.getErrorRes(e));
+    }
+  }
+
+  Future<ApiResult<CoreRes<List<Transaction>>>> fetchTransactionFuel(String idFuel) async {
+    try {
+      var result = await apiService.getTransactionFuel(idFuel);
       return ApiResult.success(data: result);
     } catch (e) {
       return ApiResult.failure(error: NetworkExceptions.getDioException(e), coreRes: NetworkExceptions.getErrorRes(e));

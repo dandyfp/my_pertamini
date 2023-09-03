@@ -10,6 +10,7 @@ class Fuel {
   int? price;
   @JsonKey(name: "number_oktan")
   int? numberOktan;
+  int? stock;
 
   Fuel({
     this.id,
@@ -17,6 +18,7 @@ class Fuel {
     this.description,
     this.price,
     this.numberOktan,
+    this.stock,
   });
 
   factory Fuel.fromJson(Map<String, dynamic> json) => _$FuelFromJson(json);
